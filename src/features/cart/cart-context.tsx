@@ -1,22 +1,18 @@
 'use client';
 
-import React, { createContext, useContext, useState, ReactNode } from 'react';
+import React, {
+ createContext,
+ useContext,
+ useState,
+ ReactNode,
+ useEffect,
+} from 'react';
 
-export interface Product {
- id: string;
- title: string;
- description: string;
- price: number;
- thumbnail: string;
-}
-
-interface CartItem {
- product: Product;
- quantity: number;
-}
+import type { CartItem, CartTotal, Product } from './types';
 
 interface CartContextType {
  cart: { [key: string]: CartItem };
+ cartTotal: CartTotal;
  handleAddToCart: (product: Product) => void;
  handleIncrement: (productId: string) => void;
  handleDecrement: (productId: string) => void;
@@ -29,6 +25,33 @@ export const CartProvider: React.FC<{ children: ReactNode }> = ({
  children,
 }) => {
  const [cart, setCart] = useState<{ [key: string]: CartItem }>({});
+ const [cartTotal, setCartTotal] = useState<CartTotal>({
+  quantity: 0,
+  price: 0,
+ });
+
+ //   const totalItems = Object.values(cart).reduce(
+ //    (acc, item) => acc + item.quantity,
+ //    0
+ //   );
+ //   const totalPrice = Object.values(cart).reduce(
+ //    (acc, item) => acc + item.product.price * item.quantity,
+ //    0
+ //   );
+
+ useEffect(() => {
+  const total = Object.values(cart).reduce(
+   (acc, { product, quantity }) => {
+    return {
+     price: acc.price + product.price * quantity,
+     quantity: acc.quantity + quantity,
+    };
+   },
+   { price: 0, quantity: 0 }
+  );
+
+  setCartTotal(total);
+ }, [cart]);
 
  const handleAddToCart = (product: Product) => {
   setCart((prevCart) => ({
@@ -74,6 +97,7 @@ export const CartProvider: React.FC<{ children: ReactNode }> = ({
   <CartContext.Provider
    value={{
     cart,
+    cartTotal,
     handleAddToCart,
     handleIncrement,
     handleDecrement,

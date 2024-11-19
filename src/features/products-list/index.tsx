@@ -3,8 +3,10 @@
 import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 
-import { type Product, useCart } from '@/components/header/cartContext';
+import { useCart } from '@/features/cart/cart-context';
 import Counter from '@/components/counter';
+
+import { type Product } from '../cart/types';
 
 interface Category {
  name: string;
@@ -103,7 +105,7 @@ const ProductsList: React.FC = () => {
           onClick={() => handleAddToCart(product)}
           className="text-sm bg-blue-500 text-white px-3 py-1 rounded-md hover:bg-blue-600 transition-colors duration-200"
          >
-          Buy Now
+          Add to cart
          </button>
         )}
        </div>

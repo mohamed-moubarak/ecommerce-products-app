@@ -1,8 +1,8 @@
 import React from 'react';
 import type { Metadata } from 'next';
 
-import Header from '../components/header';
-import { CartProvider } from '../components/header/cartContext';
+import Header from './header';
+import { CartProvider } from '../features/cart/cart-context';
 
 import './globals.css';
 import 'tailwindcss/tailwind.css';
