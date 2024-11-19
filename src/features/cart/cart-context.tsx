@@ -30,15 +30,6 @@ export const CartProvider: React.FC<{ children: ReactNode }> = ({
   price: 0,
  });
 
- //   const totalItems = Object.values(cart).reduce(
- //    (acc, item) => acc + item.quantity,
- //    0
- //   );
- //   const totalPrice = Object.values(cart).reduce(
- //    (acc, item) => acc + item.product.price * item.quantity,
- //    0
- //   );
-
  useEffect(() => {
   const total = Object.values(cart).reduce(
    (acc, { product, quantity }) => {
@@ -49,7 +40,6 @@ export const CartProvider: React.FC<{ children: ReactNode }> = ({
    },
    { price: 0, quantity: 0 }
   );
-
   setCartTotal(total);
  }, [cart]);
 
@@ -76,6 +66,7 @@ export const CartProvider: React.FC<{ children: ReactNode }> = ({
  const handleDecrement = (productId: string) => {
   setCart((prevCart) => {
    const newCart = { ...prevCart };
+
    if (newCart[productId].quantity > 1) {
     newCart[productId].quantity -= 1;
    } else {

@@ -47,14 +47,15 @@ export default function HeaderCart() {
       <p>Your cart is empty</p>
      ) : (
       <>
-       <ul className="flex flex-col gap-2">
+       <ul className="flex flex-col gap-2 max-h-[32rem] overflow-auto pr-4">
         {Object.entries(cart).map(([productId, cartItem]) => (
          <CartItem
-          key={productId}
+          key={`header-cart-${productId}`}
           item={cartItem}
           handleIncrement={() => handleIncrement(productId)}
           handleDecrement={() => handleDecrement(productId)}
           handleRemoveFromCart={() => handleRemoveFromCart(productId)}
+          onClick={() => setIsCartOpen(false)}
          />
         ))}
        </ul>

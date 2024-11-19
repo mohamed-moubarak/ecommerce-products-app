@@ -2,8 +2,8 @@ import React from 'react';
 import { PlusOutlined, MinusOutlined } from '@ant-design/icons';
 
 interface CounterProps {
- onIncrement: () => void;
- onDecrement: () => void;
+ onIncrement: React.MouseEventHandler<HTMLButtonElement>;
+ onDecrement: React.MouseEventHandler<HTMLButtonElement>;
  value: number;
 }
 

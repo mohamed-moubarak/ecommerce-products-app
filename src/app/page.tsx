@@ -1,5 +1,9 @@
-import ProductsList from '@/features/products-list';
+import ProductsList from '@/features/products-list/components/products-list';
 
 export default function Home() {
- return <ProductsList />;
+ return (
+  <div className="max-h-[calc(100%-4rem)] overflow-auto">
+   <ProductsList />
+  </div>
+ );
 }

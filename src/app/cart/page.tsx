@@ -4,7 +4,7 @@ import { useCart } from '../../features/cart/cart-context';
 import Link from 'next/link';
 import CartItem from '@/features/cart/components/cart-item';
 
-export default function Cart() {
+export default function CartPage() {
  const {
   cart,
   cartTotal,
@@ -14,7 +14,7 @@ export default function Cart() {
  } = useCart();
 
  return (
-  <div className="p-4 min-h-full bg-gray-100 border border-gray-400 ">
+  <div className="p-4 min-h-[calc(100%-4rem)] bg-gray-100 border border-gray-400 overflow-auto">
    <h1 className="text-3xl font-bold mb-6 text-center text-gray-800 cursor-default">
     Your Cart
    </h1>
@@ -26,7 +26,7 @@ export default function Cart() {
      <ul className="flex flex-col gap-4">
       {Object.entries(cart).map(([productId, item]) => (
        <CartItem
-        key={productId}
+        key={`cart-${productId}`}
         item={item}
         handleIncrement={handleIncrement}
         handleDecrement={handleDecrement}
